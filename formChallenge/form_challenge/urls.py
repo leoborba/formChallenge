@@ -19,5 +19,7 @@ from django.urls import path
 from form_challenge import views
 
 urlpatterns = [
-    path('', views.form_challenge, name='index.html'),
+    #path('', views.form_challenge, name='index.html'),
+    path("", views.form_challenge_index, name="project_index"),
+    path("<int:pk>/", views.form_challenge_detail, name="project_detail"),
 ]
