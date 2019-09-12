@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'form_challenge'
+    'form_challenge',
+    'medicalRecord'
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,8 @@ ROOT_URLCONF = 'formChallenge.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["form_challenge/templates/"],
+        'DIRS': ["form_challenge/templates/",
+                 "medicalRecord/templates/"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

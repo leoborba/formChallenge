@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block page_content %}
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var $submit = $("button[type=submit]"),
+            $inputs = $('input[type=text], input[type=date]');
+
+        function checkEmpty() {
+            return $inputs.filter(function() {
+                return !$.trim(this.value);
+            }).length === 0;
+        }
+
+        $inputs.on('keyup', function() {
+            $submit.prop("disabled", !checkEmpty());
+        }).blur();
+    });
+</script>
+
+<div class="col-md-8 offset-md-2">
+    <h1>Fichas Médicas</h1> <br>
+
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Adicionar nova ficha
+</button>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adicionar nova ficha</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form action="/medicalRecord/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="formpatient">Nome do paciente</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ patient.name}}">
+
+                <label for="formbirth">Data de Nascimento</label>
+                <input type="date" class="form-control" id="birth" name="birth" value='{{ patient.birth|date:"Y-m-d\Tg:i:s" }}'>
+
+                <label for="formcollection">Data de Coleta</label>
+                <input type="date" class="form-control" id="collection" name="collection" value='{{ patient.collection|date:"Y-m-d\Tg:i:s" }}'>
+
+                <!--<label for="formdelivery">Data de Entrega</label>
+                <input type="date" class="form-control" id="formdelivery" value='{{ patient.delivery|date:"Y-m-d\Tg:i:s" }}'>-->
+
+                <label for="formdoctor">Nome do Médico</label>
+                <input type="text" class="form-control" id="doctor" name="doctor" value="{{ patient.doctor }}">
+
+                <label for="formdid">Código Identificador</label>
+                <input type="text" class="form-control" id="formdid" name="formid" value="{{patient.formId}}">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="submit" class="btn btn-primary" disabled="disabled">Salvar</button>
+              </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <hr>
+
+    {% for form in forms %}
+    <h2><a href="{% url 'medicalRecord_detail' form.pk%}">{{ form.name }}</a></h2>
+    <small>
+        <!--Data de Nascimento: {{ form.birth }} <br>
+        Data de Coleta: {{ form.collection }} <br>
+        Data de Entrega: {{ form.delivery }} <br>
+        Nome do Médico: {{ form.doctor }} <br>-->
+        Código Identificador: {{form.formId}} &nbsp;
+    </small>
+    {% endfor %}
+    <hr>
+
+
+</div>
+{% endblock %}
