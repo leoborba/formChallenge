@@ -6,26 +6,26 @@
     <hr>
 
     <div class="col-md-8 offset-md-2">
-        <form action="/medicalRecord/updatePatient/{{ patient.pk }}/" method="post">
+        <form action="/medicalRecord/update_patient/{{ patient.pk }}/" method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="formpatient">Nome do paciente</label>
+                <label for="patient">Nome do paciente</label>
                 <input type="text" class="form-control" name="name" id="name" value="{{ patient.name}}">
 
-                <label for="formbirth">Data de Nascimento</label>
+                <label for="birth">Data de Nascimento</label>
                 <input type="date" class="form-control" name="birth" id="birth" value='{{ patient.birth|date:"Y-m-d" }}'>
 
-                <label for="formcollection">Data de Coleta</label>
+                <label for="collection">Data de Coleta</label>
                 <input type="date" class="form-control" name="collection" id="collection" value='{{ patient.collection|date:"Y-m-d" }}'>
 
-                <label for="formdelivery">Data de Entrega</label>
+                <label for="delivery">Data de Entrega</label>
                 <input type="date" class="form-control" name="delivery" id="delivery" value='{{ patient.delivery|date:"Y-m-d" }}'>
 
-                <label for="formdoctor">Nome do Médico</label>
+                <label for="doctor">Nome do Médico</label>
                 <input type="text" class="form-control" name="doctor" id="doctor" value="{{ patient.doctor }}">
 
-                <label for="formdid">Código Identificador</label>
-                <input type="text" class="form-control" name="formid" id="formid" value="{{patient.formId}}">
+                <label for="form_id">Código Identificador</label>
+                <input type="text" class="form-control" name="form_id" id="form_id" value="{{patient.formId}}">
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
         </form>

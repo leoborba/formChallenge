@@ -6,3 +6,6 @@ class PatientFormSerializer(serializers.ModelSerializer):
     class Meta:
         model = PatientForm
         fields = '__all__'
+
+    def validate(self, data):
+        teste = 'test'

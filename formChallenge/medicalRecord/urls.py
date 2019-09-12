@@ -4,7 +4,8 @@ from medicalRecord import views
 
 urlpatterns = [
     path("", views.medicalRecord_index, name="medicalRecord_index"),
+    path("add_patient/", views.medicalRecord_add, name="medicalRecord_add"),
     path("<int:pk>/", views.medicalRecord_detail, name="medicalRecord_detail"),
-    path("updatePatient/<int:pk>/", views.updatePatient, name="updatePatient"),
+    path("update_patient/<int:pk>/", views.medicalRecord_update, name="medicalRecord_update"),
     path("api-patients/", views.PatientFormViewSet.as_view(),name="apiPatients")
 ]

@@ -36,26 +36,26 @@
           </div>
 
           <div class="modal-body">
-            <form action="/medicalRecord/" method="post">
+            <form action="/medicalRecord/add_patient/" method="post">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="formpatient">Nome do paciente</label>
+                    <label for="name">Nome do paciente</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{ patient.name}}">
 
-                    <label for="formbirth">Data de Nascimento</label>
-                    <input type="date" class="form-control" id="birth" name="birth" value='{{ patient.birth|date:"Y-m-d\Tg:i:s" }}'>
+                    <label for="birth">Data de Nascimento</label>
+                    <input type="date" class="form-control" id="birth" name="birth" value='{{ patient.birth|date:"Y-m-d" }}'>
 
-                    <label for="formcollection">Data de Coleta</label>
-                    <input type="date" class="form-control" id="collection" name="collection" value='{{ patient.collection|date:"Y-m-d\Tg:i:s" }}'>
+                    <label for="collection">Data de Coleta</label>
+                    <input type="date" class="form-control" id="collection" name="collection" value='{{ patient.collection|date:"Y-m-d" }}'>
 
                     <!--<label for="formdelivery">Data de Entrega</label>
                     <input type="date" class="form-control" id="formdelivery" value='{{ patient.delivery|date:"Y-m-d\Tg:i:s" }}'>-->
 
-                    <label for="formdoctor">Nome do Médico</label>
+                    <label for="doctor">Nome do Médico</label>
                     <input type="text" class="form-control" id="doctor" name="doctor" value="{{ patient.doctor }}">
 
-                    <label for="formdid">Código Identificador</label>
-                    <input type="text" class="form-control" id="formdid" name="formid" value="{{patient.formId}}">
+                    <label for="form_id">Código Identificador</label>
+                    <input type="text" class="form-control" id="form_id" name="form_id" value="{{patient.formId}}">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
