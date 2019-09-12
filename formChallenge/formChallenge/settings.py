@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'form_challenge',
-    'medicalRecord'
+    'medicalRecord',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [

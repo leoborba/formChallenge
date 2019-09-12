@@ -1,6 +1,10 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from rest_framework import generics
+from rest_framework import viewsets
+
 from medicalRecord.models import PatientForm
+from medicalRecord.serializers import PatientFormSerializer
 
 
 def medicalRecord_index(request):
@@ -16,7 +20,7 @@ def medicalRecord_index(request):
         patient.save()
         return HttpResponseRedirect(request.path_info)
 
-    forms = PatientForm.objects.all().order_by('-collection')
+    forms = PatientForm.objects.all().order_by('-collection','name')
     context = {
         "forms": forms,
     }
@@ -63,8 +67,15 @@ def updatePatient(request, pk):
 
         patient_instance.save()
 
-    forms = PatientForm.objects.all().order_by('-collection')
+    forms = PatientForm.objects.all().order_by('-collection','name')
     context = {
         "forms": forms,
     }
     return render(request, "medicalRecord_index.html", context)
+
+class PatientFormViewSet(generics.ListCreateAPIView):
+    """
+    API endpoint that allows PatientForm to be viewed or edited.
+    """
+    queryset = PatientForm.objects.all()
+    serializer_class = PatientFormSerializer
