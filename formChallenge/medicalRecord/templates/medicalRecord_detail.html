@@ -6,37 +6,29 @@
     <hr>
 
     <div class="col-md-8 offset-md-2">
-        <form>
-            <div class="form-group">
-                <label for="formpatient">Nome do paciente</label>
-                <input type="text" class="form-control" id="formpatient" value="{{ patient.name}}">
-
-                <label for="formbirth">Data de Nascimento</label>
-                <input type="date" class="form-control" id="formbirth" value='{{ patient.birth|date:"Y-m-d" }}'>
-
-                <label for="formcollection">Data de Coleta</label>
-                <input type="date" class="form-control" id="formcollection" value='{{ patient.collection|date:"Y-m-d" }}'>
-
-                <label for="formdelivery">Data de Entrega</label>
-                <input type="date" class="form-control" id="formdelivery" value='{{ patient.delivery|date:"Y-m-d" }}'>
-
-                <label for="formdoctor">Nome do Médico</label>
-                <input type="text" class="form-control" id="formdoctor" value="{{ patient.doctor }}">
-
-                <label for="formdid">Código Identificador</label>
-                <input type="text" class="form-control" id="formdid" value="{{patient.formId}}">
-            </div>
-        </form>
-
-        <form action="/blog/{{ post.pk }}/" method="post">
+        <form action="/medicalRecord/updatePatient/{{ patient.pk }}/" method="post">
             {% csrf_token %}
             <div class="form-group">
-            </div>
-            <div class="form-group">
+                <label for="formpatient">Nome do paciente</label>
+                <input type="text" class="form-control" name="name" id="name" value="{{ patient.name}}">
+
+                <label for="formbirth">Data de Nascimento</label>
+                <input type="date" class="form-control" name="birth" id="birth" value='{{ patient.birth|date:"Y-m-d" }}'>
+
+                <label for="formcollection">Data de Coleta</label>
+                <input type="date" class="form-control" name="collection" id="collection" value='{{ patient.collection|date:"Y-m-d" }}'>
+
+                <label for="formdelivery">Data de Entrega</label>
+                <input type="date" class="form-control" name="delivery" id="delivery" value='{{ patient.delivery|date:"Y-m-d" }}'>
+
+                <label for="formdoctor">Nome do Médico</label>
+                <input type="text" class="form-control" name="doctor" id="doctor" value="{{ patient.doctor }}">
+
+                <label for="formdid">Código Identificador</label>
+                <input type="text" class="form-control" name="formid" id="formid" value="{{patient.formId}}">
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
         </form>
-
     </div>
 </div>
 {% endblock %}

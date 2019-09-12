@@ -1,8 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
-
-# Create your views here.
-from medicalRecord.forms import PatientFormPOST
+from django.shortcuts import render, get_object_or_404
 from medicalRecord.models import PatientForm
 
 
@@ -47,3 +44,27 @@ def medicalRecord_detail(request, pk):
         "form": form,
     }
     return render(request, "medicalRecord_detail.html", context)
+
+
+def updatePatient(request, pk):
+    patient_instance = get_object_or_404(PatientForm, pk=pk)
+
+    if request.method == 'POST':
+        patient_instance.name = request.POST.get('name')
+        patient_instance.birth = request.POST.get('birth')
+        patient_instance.collection = request.POST.get('collection')
+        delivery = request.POST.get('delivery')
+
+        if delivery != '':
+            patient_instance.delivery = delivery
+
+        patient_instance.doctor = request.POST.get('doctor')
+        patient_instance.formId = request.POST.get('formid')
+
+        patient_instance.save()
+
+    forms = PatientForm.objects.all().order_by('-collection')
+    context = {
+        "forms": forms,
+    }
+    return render(request, "medicalRecord_index.html", context)
