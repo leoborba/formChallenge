@@ -9,7 +9,7 @@
         <form action="/medicalRecord/update_patient/{{ patient.pk }}/" method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="patient">Nome do paciente</label>
+                <label for="name">Nome do paciente</label>
                 <input type="text" class="form-control" name="name" id="name" value="{{ patient.name}}">
 
                 <label for="birth">Data de Nascimento</label>

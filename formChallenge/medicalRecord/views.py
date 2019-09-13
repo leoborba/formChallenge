@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework import generics
 from medicalRecord.controllerPatient import add_patient, update_patient
 from medicalRecord.models import PatientForm
@@ -19,7 +19,6 @@ def medicalRecord_add(request):
         add_patient(request.POST.get('name'),
                     request.POST.get('birth'),
                     request.POST.get('collection'),
-                    request.POST.get('delivery'),
                     request.POST.get('doctor'),
                     request.POST.get('form_id')
                    )
@@ -29,7 +28,8 @@ def medicalRecord_add(request):
 
 def medicalRecord_update(request, pk):
     if request.method == 'POST':
-        update_patient(pk,
+        patient_instance = get_object_or_404(PatientForm, pk=pk)
+        update_patient(patient_instance,
                        request.POST.get('name'),
                        request.POST.get('birth'),
                        request.POST.get('collection'),
